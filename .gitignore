@@ -1,0 +1,12 @@
+*.iml
+*.idea
+.settings
+.project
+.DS_Store
+.classpath
+*.log
+*.class
+out/**
+test/reports
+target
+
