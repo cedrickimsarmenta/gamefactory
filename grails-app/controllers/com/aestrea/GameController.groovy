@@ -38,7 +38,7 @@ class GameController {
         results.add("Kung hei fat choi!")
 
         model.results = results
-        model.game = 'FENG SHUI'
+        model.game = params.game
 
         render view: '/game/play', model: model
     }
@@ -100,7 +100,7 @@ class GameController {
         results.add("Remaining letters: ${remaining}")
         results.add("Result: ${flamesRes}")
         model.results = results
-        model.game = 'FLAMES'
+        model.game = params.game
 
         render view: '/game/play', model: model
     }
