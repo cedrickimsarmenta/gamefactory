@@ -48,23 +48,10 @@ class GameController {
         String firstName = params.firstName
         String secondName = params.secondName
 
-        def charArr1 = firstName.replace(' ', '').toLowerCase().toCharArray()
-        def charArr2 = secondName.replace(' ', '').toLowerCase().toCharArray()
+        List firstNameCharacters = firstName.collect{ it }
+        List secondNameCharacters = secondName.collect{ it }
 
-        for (int i = 0; i < charArr1.length; i++) {
-            for (int j = 0; j < charArr2.length; j++) {
-                if (charArr2[j] == charArr1[i]) {
-                    charArr2[j] = charArr1[i] = "*"
-                    break
-                }
-            }
-        }
-
-
-        firstName = charArr1.toString()
-        secondName = charArr2.toString()
-
-        int remaining = firstName.replace('*', '').length() + secondName.replace('*', '').length()
+        int remaining = ((firstNameCharacters + secondNameCharacters).unique() - firstNameCharacters.intersect( secondNameCharacters )).size()
 
         String flamesRes
         if (remaining > 0) {
