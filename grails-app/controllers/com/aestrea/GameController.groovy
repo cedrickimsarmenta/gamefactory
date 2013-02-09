@@ -2,6 +2,8 @@ package com.aestrea
 
 class GameController {
 
+    private static final int FENGSHUI_REFERENCE_YEAR = 1920
+
     def index() {
         def model = [:]
 
@@ -25,102 +27,14 @@ class GameController {
 
     private void playFengShui() {
         def model =[:]
-
-        int year = Integer.parseInt(params.year)
-
-        int sYear = 1920
-
-        int dYear = year - sYear
-
-        String zodiac
-
-        String element
-
-        String message
-
-        switch (dYear % 12) {
-            case 0:
-                zodiac = "Monkey"
-                element = "Metal"
-                message = "Quick-witted"
-                break
-
-            case 1:
-                zodiac = "Rooster"
-                element = "Metal"
-                message = "Honest"
-                break
-
-            case 2:
-                zodiac = "Dog"
-                element = "Earth"
-                message = "Loyal"
-                break
-
-            case 3:
-                zodiac = "Pig"
-                message = "Water"
-                element = "Honorable"
-
-                break
-
-            case 4:
-                zodiac = "Rat"
-                message = "Intelligent"
-                element = "Water"
-
-                break
-
-            case 5:
-                zodiac = "Ox"
-                message = "Loyal"
-                element = "Earth"
-
-                break
-
-            case 6:
-                zodiac = "Tiger"
-                message = "Enthusiastic"
-                element = "Wood"
-
-                break
-
-            case 7:
-                zodiac = "Rabbit"
-                element = "Wood"
-                message = "TrustWorthy"
-                break
-            case 8:
-                zodiac = "Dragon"
-                message = "Lucky"
-                element = "Earth"
-
-                break
-            case 9:
-                zodiac = "Snake"
-                message = "Philosopical"
-                element = "Fire"
-
-                break
-            case 10:
-                zodiac = "Horse"
-                message = "Adaptable"
-                element = "Fire"
-
-                break
-
-            case 11:
-                zodiac = "Goat"
-                message = "Tasteful"
-                element = "Earth"
-
-                break
-        }
+        int birthYear = Integer.parseInt(params.year)
+        int differenceYear = birthYear - FENGSHUI_REFERENCE_YEAR
+        def zodiac = ChineseZodiac.values()[ differenceYear%12 ]
 
         def results = []
-        results.add("Your zodiac: ${zodiac}")
-        results.add("Element: ${element}")
-        results.add("Characteristics: ${message}")
+        results.add("Your zodiac: ${zodiac.name}")
+        results.add("Element: ${zodiac.element}")
+        results.add("Characteristics: ${zodiac.message}")
         results.add("Kung hei fat choi!")
 
         model.results = results
@@ -189,6 +103,35 @@ class GameController {
         model.game = 'FLAMES'
 
         render view: '/game/play', model: model
+    }
+
+}
+
+public enum ChineseZodiac {
+
+    MONKEY( 'Monkey', 'Metal', 'Quick-witted' ),
+    ROOSTER( 'Rooster', 'Metal', 'Honest' ),
+    DOG( 'Dog', 'Earth', 'Loyal' ),
+    PIG( 'Pig', 'Water', 'Honorable' ),
+    RAT( 'Rat', 'Water', 'Intelligent' ),
+    OX( 'Ox', 'Earth', 'Loyal' ),
+    TIGER( 'Tiger', 'Wood', 'Enthusiastic' ),
+    RABBIT( 'Rabbit', 'Wood', 'TrustWorthy' ),
+    DRAGON( 'Dragon', 'Earth', 'Lucky' ),
+    SNAKE( 'Snake', 'Fire', 'Philosophical' ),
+    HORSE( 'Horse', 'Fire', 'Adaptable' ),
+    GOAT( 'Goat', 'Earth', 'Tasteful' )
+
+    String name, element, message
+
+    private ChineseZodiac( name, element, message ){
+        this.name = name
+        this.element = element
+        this.message = message
+    }
+
+    String toString(){
+        "${name} ${element} ${message}"
     }
 
 }
