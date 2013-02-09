@@ -9,11 +9,11 @@
                                     "<h3>Enter 2 names and find out if they are meant to be!</h3>" +
                                     "<div>" +
                                         "<label>First Name:</label>" +
-                                        "<input name='firstName' type='text'/>" +
+                                        "<input name='firstPerson' type='text'/>" +
                                     "</div>" +
                                     "<div>" +
                                         "<label>Second Name:</label>" +
-                                        "<input name='secondName' type='text'/>" +
+                                        "<input name='secondPerson' type='text'/>" +
                                     "</div>" +
                                 "</div>"
 
@@ -26,7 +26,7 @@
                       "and I'll give you your chinese zodiac and some hula hula.</h3>" +
                       "<div>" +
                       "<label>Chinese birth year:</label>" +
-                      "<input name='year' type='text'/>" +
+                      "<input name='birthYear' type='text'/>" +
                       "</div>" +
                       "</div>"
               $gameContainer.children().remove();

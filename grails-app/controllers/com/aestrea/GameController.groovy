@@ -2,32 +2,30 @@ package com.aestrea
 
 class GameController {
 
+    private static final Integer START_YEAR = 1920
+
     def index() {
         def model = [:]
-
         model.games = ["FLAMES", "FENG SHUI"]
-
         render view: '/game/index', model: model
     }
 
-    def play() {
+    def play = {
         if (params.game == 'FLAMES') {
-            playFlames()
+            flames( params.firstPerson, params.secondPerson )
         } else if (params.game == 'FENG SHUI') {
-            playFengShui()
+            fengshui( params.birthYear )
         }
     }
 
-    def playFlames() {
+    def flames( firstPerson, secondPerson) {
         def model = [:]
-        String firstName = params.firstName
-        String secondName = params.secondName
 
-        def charArr1 = firstName.replace(' ','').toLowerCase().toCharArray()
-        def charArr2 = secondName.replace(' ','').toLowerCase().toCharArray()
+        def charArr1 = transformName firstPerson
+        def charArr2 = transformName secondPerson
 
-        for(int i=0; i<charArr1.length; i++) {
-            for(int j=0; j<charArr2.length; j++) {
+        for(int i=0; i < charArr1.length; i++) {
+            for(int j=0; j < charArr2.length; j++) {
                 if (charArr2[j] == charArr1[i]) {
                     charArr2[j] = charArr1[i] = "*"
                     break
@@ -35,11 +33,12 @@ class GameController {
             }
         }
 
+        firstPerson = charArr1.toString()
+        secondPerson = charArr2.toString()
 
-        firstName = charArr1.toString()
-        secondName = charArr2.toString()
+        int remaining = firstPerson.replace('*','').length() + secondPerson.replace('*','').length()
 
-        int remaining = firstName.replace('*','').length() + secondName.replace('*','').length()
+
 
         String flamesRes
         if(remaining > 0) {
@@ -67,10 +66,9 @@ class GameController {
             flamesRes = message(code: 'flames.invalid')
         }
 
-
         def results = []
-        results.add("First Name: ${firstName}")
-        results.add("Second Name: ${secondName}")
+        results.add("First Name: ${firstPerson}")
+        results.add("Second Name: ${secondPerson}")
         results.add("Remaining letters: ${remaining}")
         results.add("Result: ${flamesRes}")
         model.results = results
@@ -80,21 +78,17 @@ class GameController {
 
     }
 
-    def playFengShui() {
+    def fengshui( birthYear ) {
         def model = [:]
-        int year = Integer.parseInt(params.year)
-
-        int sYear = 1920
-
-        int dYear = year - sYear
+        int year = Integer.parseInt( birthYear )
+        int startYear = START_YEAR
+        int differenceYear = year - startYear
 
         String zodiac
-
         String element
-
         String message
 
-        switch (dYear % 12) {
+        switch (differenceYear % 12) {
             case 0:
                 zodiac = "Monkey"
                 element = "Metal"
@@ -153,6 +147,7 @@ class GameController {
 
                 break
             case 9:
+
                 zodiac = "Snake"
                 message = "Philosopical"
                 element ="Fire"
@@ -184,4 +179,9 @@ class GameController {
 
         render view: '/game/play', model: model
     }
+
+    private transformName( name ){
+        name.replace(' ','').toLowerCase().toCharArray()
+    }
+
 }
