@@ -169,6 +169,7 @@ class GameController {
             results.add("Your zodiac: ${zodiac}")
             results.add("Element: ${element}")
             results.add("Characteristics: ${message}")
+            results.add("Kung hei fat choi!")
 
             model.results = results
             model.game = 'FENG SHUI'
