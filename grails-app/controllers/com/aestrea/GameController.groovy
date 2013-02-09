@@ -11,17 +11,21 @@ class GameController {
     }
 
     def play() {
-        def model = [:]
+
 
         if (params.game == 'FLAMES') {
-            playFlames(model)
+            playFlames()
 
         } else if (params.game == 'FENG SHUI') {
-            playFengShui(model)
+            playFengShui()
         }
+
+
     }
 
-    private void playFengShui(LinkedHashMap model) {
+    private void playFengShui() {
+        def model =[:]
+
         int year = Integer.parseInt(params.year)
 
         int sYear = 1920
@@ -125,7 +129,8 @@ class GameController {
         render view: '/game/play', model: model
     }
 
-    private void playFlames(LinkedHashMap model) {
+    private void playFlames() {
+        def model =[:]
         String firstName = params.firstName
         String secondName = params.secondName
 
