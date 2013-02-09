@@ -1,5 +1,7 @@
 package com.aestrea
 
+import gamefactory.Zodiac
+
 class GameController {
 
     private static final Integer START_YEAR = 1920
@@ -84,94 +86,53 @@ class GameController {
         int startYear = START_YEAR
         int differenceYear = year - startYear
 
-        String zodiac
+        Zodiac zodiac
         String element
         String message
 
         switch (differenceYear % 12) {
             case 0:
-                zodiac = "Monkey"
-                element = "Metal"
-                message = "Quick-witted"
+                zodiac = Zodiac.findByName( 'Monkey' )
                 break
-
             case 1:
-                zodiac = "Rooster"
-                element ="Metal"
-                message = "Honest"
+                zodiac = Zodiac.findByName( 'Rooster' )
                 break
-
             case 2:
-                zodiac = "Dog"
-                element ="Earth"
-                message = "Loyal"
+                zodiac = Zodiac.findByName( 'Rooster' )
                 break
-
             case 3:
-                zodiac = "Pig"
-                message = "Water"
-                element = "Honorable"
-
+                zodiac = Zodiac.findByName( 'Pig' )
                 break
-
             case 4:
-                zodiac = "Rat"
-                message = "Intelligent"
-                element ="Water"
-
+                zodiac = Zodiac.findByName( 'Rat' )
                 break
-
             case 5:
-                zodiac = "Ox"
-                message = "Loyal"
-                element ="Earth"
-
+                zodiac = Zodiac.findByName( 'Ox' )
                 break
-
             case 6:
-                zodiac = "Tiger"
-                message = "Enthusiastic"
-                element ="Wood"
-
+                zodiac = Zodiac.findByName( 'Tiger' )
                 break
-
             case 7:
-                zodiac = "Rabbit"
-                element = "Wood"
-                message = "TrustWorthy"
+                zodiac = Zodiac.findByName( 'Rabbit' )
                 break
             case 8:
-                zodiac = "Dragon"
-                message = "Lucky"
-                element ="Earth"
-
+                zodiac = Zodiac.findByName( 'Dragon' )
                 break
             case 9:
-
-                zodiac = "Snake"
-                message = "Philosopical"
-                element ="Fire"
-
+                zodiac = Zodiac.findByName( 'Snake' )
                 break
             case 10:
-                zodiac = "Horse"
-                message = "Adaptable"
-                element ="Fire"
-
+                zodiac = Zodiac.findByName( 'Horse' )
                 break
-
             case 11:
-                zodiac = "Goat"
-                message = "Tasteful"
-                element ="Earth"
-
+                zodiac = Zodiac.findByName( 'Goat' )
                 break
         }
 
         def results = []
         results.add("Your zodiac: ${zodiac}")
-        results.add("Element: ${element}")
-        results.add("Characteristics: ${message}")
+        results.add("Element: ${zodiac.element}")
+        results.add("Characteristics: ${zodiac.message}")
         results.add("Kung hei fat choi!")
 
         model.results = results
