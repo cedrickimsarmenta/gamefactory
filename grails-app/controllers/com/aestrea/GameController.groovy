@@ -32,10 +32,10 @@ class GameController {
         def zodiac = ChineseZodiac.values()[ differenceYear%12 ]
 
         def results = []
-        results.add("Your zodiac: ${zodiac.name}")
-        results.add("Element: ${zodiac.element}")
-        results.add("Characteristics: ${zodiac.message}")
-        results.add("Kung hei fat choi!")
+        results << "Your zodiac: ${zodiac.name}"
+        results << "Element: ${zodiac.element}"
+        results << "Characteristics: ${zodiac.message}"
+        results << "Kung hei fat choi!"
 
         model.results = results
         model.game = params.game
@@ -95,10 +95,10 @@ class GameController {
 
 
         def results = []
-        results.add("First Name: ${firstName}")
-        results.add("Second Name: ${secondName}")
-        results.add("Remaining letters: ${remaining}")
-        results.add("Result: ${flamesRes}")
+        results << "First Name: ${firstName}"
+        results << "Second Name: ${secondName}"
+        results << "Remaining letters: ${remaining}"
+        results << "Result: ${flamesRes}"
         model.results = results
         model.game = params.game
 
