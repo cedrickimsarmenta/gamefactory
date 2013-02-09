@@ -64,8 +64,7 @@ class GameController {
                     break
             }
         } else {
-            flamesRes = "Cannot flames! All the letters of the two names matched! Either the names are ambigrams of each other or " +
-                    "you tried to flames with the same person. How vain. ewe!"
+            flamesRes = message(code: 'flames.invalid')
         }
 
 
